@@ -1,1252 +1,1410 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tradersmind Capital | קרן גידור למשקיעים כשירים</title>
-    <meta name="description" content="Tradersmind Capital - קרן גידור המתמקדת בניהול סיכונים משמעתי ושימור הון לטווח ארוך. למשקיעים כשירים בלבד.">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Assistant:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --color-bg-primary: #0a0b0d;
-            --color-bg-secondary: #111318;
-            --color-bg-tertiary: #1a1c23;
-            --color-text-primary: #e8e6e3;
-            --color-text-secondary: #9a9590;
-            --color-text-muted: #6b6560;
-            --color-accent: #c9a962;
-            --color-accent-muted: rgba(201, 169, 98, 0.15);
-            --color-border: rgba(201, 169, 98, 0.12);
-            --color-border-subtle: rgba(255, 255, 255, 0.06);
-            
-            --font-display: 'Cormorant Garamond', serif;
-            --font-body: 'Assistant', sans-serif;
-            
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 4rem;
-            --spacing-xl: 8rem;
-            
-            --transition-fast: 0.2s ease;
-            --transition-medium: 0.4s ease;
-            --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--color-bg-primary);
-            color: var(--color-text-primary);
-            line-height: 1.7;
-            font-weight: 300;
-            overflow-x: hidden;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-family: var(--font-display);
-            font-weight: 400;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 300;
-        }
-
-        h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: var(--spacing-md);
-        }
-
-        h3 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        p {
-            font-size: 1.05rem;
-            color: var(--color-text-secondary);
-            max-width: 65ch;
-        }
-
-        /* Layout */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-md);
-        }
-
-        .section {
-            padding: var(--spacing-xl) 0;
-            position: relative;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 1px;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, var(--color-border), transparent);
-            opacity: 0.5;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            z-index: 1000;
-            padding: var(--spacing-sm) 0;
-            background: rgba(10, 11, 13, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--color-border-subtle);
-            transition: var(--transition-medium);
-        }
-
-        .nav.scrolled {
-            padding: 0.75rem 0;
-        }
-
-        .nav-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            text-decoration: none;
-            color: var(--color-text-primary);
-        }
-
-        .logo-mark {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--color-accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            color: var(--color-accent);
-            position: relative;
-        }
-
-        .logo-mark::after {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            border: 1px solid var(--color-accent);
-            opacity: 0.3;
-        }
-
-        .logo-text {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--spacing-md);
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 400;
-            letter-spacing: 0.03em;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            right: 0;
-            width: 0;
-            height: 1px;
-            background: var(--color-accent);
-            transition: var(--transition-fast);
-        }
-
-        .nav-links a:hover {
-            color: var(--color-text-primary);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-        }
-
-        .mobile-menu-btn span {
-            width: 24px;
-            height: 1px;
-            background: var(--color-text-primary);
-            transition: var(--transition-fast);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-        }
-
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(201, 169, 98, 0.08), transparent),
-                radial-gradient(ellipse 60% 40% at 100% 50%, rgba(201, 169, 98, 0.04), transparent);
-        }
-
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(var(--color-border-subtle) 1px, transparent 1px),
-                linear-gradient(90deg, var(--color-border-subtle) 1px, transparent 1px);
-            background-size: 60px 60px;
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-eyebrow {
-            font-size: 0.85rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            margin-bottom: var(--spacing-md);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.2s;
-        }
-
-        .hero-eyebrow::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: var(--color-accent);
-        }
-
-        .hero h1 {
-            margin-bottom: var(--spacing-md);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.4s;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--color-text-secondary);
-            max-width: 600px;
-            margin-bottom: var(--spacing-lg);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.6s;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: var(--spacing-md);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.8s;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            padding: 1rem 2rem;
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-decoration: none;
-            transition: var(--transition-medium);
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--color-accent);
-            color: var(--color-bg-primary);
-        }
-
-        .btn-primary:hover {
-            background: #d4b36d;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-text-primary);
-            border: 1px solid var(--color-border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--color-accent);
-            color: var(--color-accent);
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-xl);
-            padding-top: var(--spacing-lg);
-            border-top: 1px solid var(--color-border-subtle);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 1s;
-        }
-
-        .stat-item {
-            text-align: right;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--color-text-muted);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .stat-value {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: var(--color-text-primary);
-        }
-
-        /* Page Sections */
-        .page-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: var(--spacing-xl) 0;
-            position: relative;
-        }
-
-        .page-section:nth-child(even) {
-            background: var(--color-bg-secondary);
-        }
-
-        .section-header {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .section-number {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            letter-spacing: 0.2em;
-            color: var(--color-accent);
-            margin-bottom: var(--spacing-sm);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-
-        .section-number::after {
-            content: '';
-            flex: 1;
-            max-width: 100px;
-            height: 1px;
-            background: var(--color-border);
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-xl);
-            align-items: start;
-        }
-
-        .content-text {
-            padding-left: var(--spacing-lg);
-        }
-
-        .content-text p {
-            margin-bottom: var(--spacing-md);
-        }
-
-        .content-text p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Feature Cards */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-lg);
-        }
-
-        .feature-card {
-            background: var(--color-bg-tertiary);
-            padding: var(--spacing-md);
-            border: 1px solid var(--color-border-subtle);
-            transition: var(--transition-medium);
-            position: relative;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: var(--color-accent);
-            transition: var(--transition-slow);
-        }
-
-        .feature-card:hover {
-            border-color: var(--color-border);
-            transform: translateY(-4px);
-        }
-
-        .feature-card:hover::before {
-            width: 100%;
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            margin-bottom: var(--spacing-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--color-accent);
-            color: var(--color-accent);
-        }
-
-        .feature-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: var(--spacing-xs);
-            color: var(--color-text-primary);
-        }
-
-        .feature-card p {
-            font-size: 0.95rem;
-            color: var(--color-text-muted);
-        }
-
-        /* Principles List */
-        .principles-list {
-            list-style: none;
-            counter-reset: principle;
-        }
-
-        .principles-list li {
-            counter-increment: principle;
-            padding: var(--spacing-md) 0;
-            border-bottom: 1px solid var(--color-border-subtle);
-            display: flex;
-            gap: var(--spacing-md);
-            align-items: flex-start;
-        }
-
-        .principles-list li::before {
-            content: counter(principle, decimal-leading-zero);
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: var(--color-accent);
-            opacity: 0.6;
-            min-width: 50px;
-        }
-
-        .principle-content h4 {
-            font-size: 1.15rem;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .principle-content p {
-            font-size: 0.95rem;
-        }
-
-        /* Info Box */
-        .info-box {
-            background: var(--color-bg-tertiary);
-            border: 1px solid var(--color-border);
-            padding: var(--spacing-lg);
-            margin-top: var(--spacing-lg);
-            position: relative;
-        }
-
-        .info-box::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            right: var(--spacing-md);
-            width: 60px;
-            height: 3px;
-            background: var(--color-accent);
-        }
-
-        .info-box h4 {
-            font-size: 1.25rem;
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-accent);
-        }
-
-        /* Legal Disclaimer */
-        .disclaimer-box {
-            background: rgba(201, 169, 98, 0.05);
-            border: 1px solid var(--color-border);
-            padding: var(--spacing-lg);
-            margin-top: var(--spacing-lg);
-        }
-
-        .disclaimer-box h4 {
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: var(--spacing-md);
-            color: var(--color-accent);
-        }
-
-        .disclaimer-box p {
-            font-size: 0.9rem;
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-text-muted);
-        }
-
-        .disclaimer-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: var(--color-bg-secondary);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-xl);
-        }
-
-        .contact-info {
-            padding-left: var(--spacing-lg);
-        }
-
-        .contact-info h3 {
-            margin-bottom: var(--spacing-md);
-        }
-
-        .contact-details {
-            margin-top: var(--spacing-lg);
-        }
-
-        .contact-item {
-            margin-bottom: var(--spacing-md);
-        }
-
-        .contact-label {
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--color-text-muted);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .contact-value {
-            font-size: 1.1rem;
-            color: var(--color-text-primary);
-        }
-
-        .contact-value a {
-            color: inherit;
-            text-decoration: none;
-            transition: var(--transition-fast);
-        }
-
-        .contact-value a:hover {
-            color: var(--color-accent);
-        }
-
-        .contact-form {
-            background: var(--color-bg-tertiary);
-            padding: var(--spacing-lg);
-            border: 1px solid var(--color-border-subtle);
-        }
-
-        .form-group {
-            margin-bottom: var(--spacing-md);
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            background: var(--color-bg-secondary);
-            border: 1px solid var(--color-border-subtle);
-            color: var(--color-text-primary);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: var(--transition-fast);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--color-accent);
-        }
-
-        .form-input::placeholder {
-            color: var(--color-text-muted);
-        }
-
-        textarea.form-input {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .form-checkbox {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .form-checkbox input {
-            margin-top: 4px;
-            accent-color: var(--color-accent);
-        }
-
-        .form-checkbox label {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--color-bg-primary);
-            padding: var(--spacing-lg) 0;
-            border-top: 1px solid var(--color-border-subtle);
-        }
-
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-copy {
-            font-size: 0.85rem;
-            color: var(--color-text-muted);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: var(--spacing-md);
-            list-style: none;
-        }
-
-        .footer-links a {
-            font-size: 0.85rem;
-            color: var(--color-text-muted);
-            text-decoration: none;
-            transition: var(--transition-fast);
-        }
-
-        .footer-links a:hover {
-            color: var(--color-accent);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition-slow);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .content-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-lg);
-            }
-
-            .content-text {
-                padding-right: 0;
-            }
-
-            .contact-info {
-                padding-right: 0;
-            }
-
-            .feature-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                gap: var(--spacing-md);
-                text-align: center;
-            }
-        }
-
-        /* Smooth scroll offset for fixed nav */
-        [id] {
-            scroll-margin-top: 100px;
-        }
-
-        /* Selection */
-        ::selection {
-            background: var(--color-accent);
-            color: var(--color-bg-primary);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tradersmind Capital | קרן גידור למשקיעים כשירים</title>
+  <meta
+    name="description"
+    content="Tradersmind Capital - קרן גידור למשקיעים כשירים בלבד. ניהול הון ממושמע, בקרת סיכונים רב שכבתית ותשתית מוסדית מלאה."
+  />
+  <meta name="theme-color" content="#0c1117" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&amp;family=Libre+Baskerville:wght@400;700&amp;display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #0c1117;
+      --bg-soft: #111a23;
+      --panel: #131f2b;
+      --panel-2: #182737;
+      --text: #e8eef6;
+      --muted: #99a8ba;
+      --line: rgba(255, 255, 255, 0.09);
+      --accent: #d6b46f;
+      --accent-soft: rgba(214, 180, 111, 0.16);
+      --danger: #f0c4c4;
+      --radius: 16px;
+      --container: 1240px;
+      --shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Heebo", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(214, 180, 111, 0.08), transparent 35%),
+        radial-gradient(circle at 85% 30%, rgba(105, 178, 255, 0.08), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(100% - 2.4rem, var(--container));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 6.5rem 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: "Libre Baskerville", serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      letter-spacing: 0.01em;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 70ch;
+      margin-bottom: 2rem;
+      font-size: 1.06rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 0.42rem 0.82rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chip::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 40;
+      border-bottom: 1px solid transparent;
+      transition: 220ms ease;
+    }
+
+    .topbar.scrolled {
+      background: rgba(9, 14, 20, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom-color: var(--line);
+    }
+
+    .topbar-inner {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .mark {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-family: "Libre Baskerville", serif;
+      font-size: 1rem;
+      color: var(--accent);
+      background: rgba(214, 180, 111, 0.06);
+    }
+
+    .brand-text {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 0.98rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1.3rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: 180ms ease;
+      padding-bottom: 0.15rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-bottom-color: var(--accent);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.52rem 0.7rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: end;
+      padding: 8rem 0 4rem;
+      position: relative;
+      overflow: clip;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(7, 11, 16, 0.55), rgba(7, 11, 16, 0.87)),
+        url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&amp;fit=crop&amp;w=2000&amp;q=80") center/cover;
+      z-index: -2;
+      transform: scale(1.04);
+      animation: heroZoom 16s ease-in-out infinite alternate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 42%;
+      background: linear-gradient(180deg, rgba(12, 17, 23, 0), var(--bg));
+      z-index: -1;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.04); }
+      to { transform: scale(1.08); }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.85fr;
+      gap: 2rem;
+      align-items: end;
+    }
+
+    .hero h1 {
+      font-family: "Libre Baskerville", serif;
+      font-size: clamp(2.25rem, 5.2vw, 4.6rem);
+      line-height: 1.08;
+      margin: 1rem 0 1.3rem;
+      max-width: 14ch;
+    }
+
+    .hero p {
+      color: #d5dfec;
+      max-width: 58ch;
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      margin-top: 1.8rem;
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0.84rem 1.35rem;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: 190ms ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1a1307;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(214, 180, 111, 0.25);
+    }
+
+    .btn-ghost {
+      border-color: rgba(255, 255, 255, 0.28);
+      color: #ecf3fb;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-panel {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(10, 16, 23, 0.72);
+      border-radius: var(--radius);
+      padding: 1.15rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+    }
+
+    .hero-panel p {
+      font-size: 0.94rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-list {
+      list-style: none;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .hero-list li {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 0.6rem;
+      font-size: 0.9rem;
+      color: #d9e5f2;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .hero-list strong {
+      color: var(--accent);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .proof-strip {
+      margin-top: 2.2rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+    }
+
+    .proof-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .proof-item .label {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .proof-item .value {
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-top: 0.25rem;
+      color: #eff5fc;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+      align-items: start;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      padding: 1.4rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .values-grid {
+      margin-top: 1.4rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .value {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+
+    .value h4 {
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+      color: #edf4fb;
+    }
+
+    .value p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .image-card {
+      position: relative;
+      min-height: 350px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .image-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .image-caption {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(6, 9, 13, 0), rgba(6, 9, 13, 0.84));
+      color: #f0f5fc;
+      font-size: 0.9rem;
+    }
+
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.3rem;
+    }
+
+    .strategy {
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 1.1rem;
+    }
+
+    .strategy h4 {
+      color: #f2f7fd;
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+    }
+
+    .strategy p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .timeline {
+      margin-top: 2rem;
+      border-inline-start: 1px solid var(--line);
+      padding-inline-start: 1rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      padding: 1rem;
+      position: relative;
+    }
+
+    .step::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: absolute;
+      inset-inline-start: -1.35rem;
+      top: 1.35rem;
+      box-shadow: 0 0 0 4px rgba(214, 180, 111, 0.22);
+    }
+
+    .step h4 {
+      margin-bottom: 0.45rem;
+      font-size: 1rem;
+      color: #f3f8fe;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1rem;
+      margin-top: 1.1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--panel);
+    }
+
+    th,
+    td {
+      padding: 0.82rem;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: #eff6fe;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    .highlight {
+      border: 1px solid rgba(214, 180, 111, 0.34);
+      background: linear-gradient(180deg, rgba(214, 180, 111, 0.12), rgba(214, 180, 111, 0.04));
+      border-radius: var(--radius);
+      padding: 1.1rem;
+    }
+
+    .highlight h4 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+      color: #fff2ce;
+    }
+
+    .highlight p,
+    .highlight li {
+      color: #f5e8c7;
+      font-size: 0.9rem;
+    }
+
+    .highlight ul {
+      margin-top: 0.65rem;
+      list-style: none;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .highlight li::before {
+      content: "- ";
+      color: #ffe0a2;
+    }
+
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .legal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .legal-list {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+      margin-top: 0.7rem;
+    }
+
+    .legal-list li {
+      color: var(--muted);
+      font-size: 0.92rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 10px;
+      padding: 0.7rem 0.8rem;
+    }
+
+    .doc {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      background: var(--panel);
+      min-height: 180px;
+      display: grid;
+      align-content: start;
+      gap: 0.5rem;
+    }
+
+    .doc h4 {
+      font-size: 1rem;
+      color: #f0f5fd;
+    }
+
+    .doc p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .doc .tag {
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+    }
+
+    .faq {
+      margin-top: 1.2rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 0.7rem 0.9rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #edf4fb;
+      list-style: none;
+      padding-inline-end: 1.3rem;
+      position: relative;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      inset-inline-end: 0;
+      top: -0.1rem;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    details p {
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-size: 0.92rem;
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .contact-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.1rem;
+      background: var(--panel);
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-top: 0.8rem;
+      display: grid;
+      gap: 0.6rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .contact-list strong {
+      color: #eff6fd;
+      font-weight: 700;
+      margin-inline-start: 0.2rem;
+    }
+
+    .contact-form {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      padding: 1.1rem;
+    }
+
+    .field {
+      margin-bottom: 0.72rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.28rem;
+      font-size: 0.86rem;
+      color: #deebf8;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.72rem 0.8rem;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .checks {
+      display: grid;
+      gap: 0.45rem;
+      margin: 0.55rem 0 0.9rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .check {
+      display: flex;
+      gap: 0.45rem;
+      align-items: flex-start;
+    }
+
+    .check input {
+      width: auto;
+      margin-top: 0.2rem;
+      accent-color: var(--accent);
+    }
+
+    .legal-note {
+      border: 1px solid rgba(240, 196, 196, 0.35);
+      border-radius: 12px;
+      background: rgba(115, 33, 33, 0.14);
+      color: var(--danger);
+      font-size: 0.86rem;
+      padding: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 1.4rem 0 1.8rem;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      gap: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-links a:hover {
+      border-bottom-color: var(--accent);
+      color: #f0f6fd;
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: 450ms ease;
+    }
+
+    [data-reveal].show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    [id] {
+      scroll-margin-top: 92px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .grid-2,
+      .risk-grid,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .values-grid,
+      .strategy-grid,
+      .docs-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .topbar-inner {
+        height: 72px;
+      }
+
+      .brand-text {
+        font-size: 0.86rem;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-links.open {
+        display: grid;
+        position: absolute;
+        top: 100%;
+        inset-inline: 1rem;
+        background: rgba(12, 17, 23, 0.97);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 0.8rem;
+        gap: 0.65rem;
+      }
+
+      .hero {
+        padding-top: 7rem;
+      }
+
+      .proof-strip,
+      .values-grid,
+      .strategy-grid,
+      .docs-grid,
+      .legal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 5rem 0;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="container">
-            <div class="nav-inner">
-                <a href="#" class="logo">
-                    <div class="logo-mark">TC</div>
-                    <span class="logo-text">Tradersmind Capital</span>
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#about">אודות</a></li>
-                    <li><a href="#hedge-fund">מהי קרן גידור</a></li>
-                    <li><a href="#philosophy">פילוסופיית השקעה</a></li>
-                    <li><a href="#risk">ניהול סיכונים</a></li>
-                    <li><a href="#investors">משקיעים כשירים</a></li>
-                    <li><a href="#contact">יצירת קשר</a></li>
-                </ul>
-                <button class="mobile-menu-btn" aria-label="תפריט">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </nav>
+  <header class="topbar" id="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#home" aria-label="Tradersmind Capital">
+        <span class="mark">TC</span>
+        <span class="brand-text">Tradersmind Capital</span>
+      </a>
 
-    <!-- Hero Section -->
+      <button class="menu-btn" id="menuBtn" aria-label="פתיחת תפריט">תפריט</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">אודות</a></li>
+        <li><a href="#strategy">אסטרטגיה</a></li>
+        <li><a href="#process">תהליך השקעה</a></li>
+        <li><a href="#risk">ניהול סיכונים</a></li>
+        <li><a href="#governance">ממשל ותפעול</a></li>
+        <li><a href="#docs">מסמכים</a></li>
+        <li><a href="#legal">משפטי ורגולציה</a></li>
+        <li><a href="#faq">שאלות נפוצות</a></li>
+        <li><a href="#contact">יצירת קשר</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
     <section class="hero" id="home">
-        <div class="hero-bg">
-            <div class="hero-grid"></div>
+      <div class="container hero-grid">
+        <div data-reveal>
+          <span class="chip">קרן גידור למשקיעים כשירים בלבד</span>
+          <h1>ניהול הון מוסדי. משמעת קבועה. שקיפות מלאה.</h1>
+          <p>
+            Tradersmind Capital פועלת בגישת Long/Short ממושמעת, עם בקרת סיכונים יומית,
+            מדיניות הקצאת הון קשיחה ותהליך קבלת החלטות שאינו תלוי בתחושת בטן.
+            אנו בונים פורטפוליו מתוך מטרה ברורה: שמירה על הון לצד יצירת תשואה מותאמת סיכון לאורך זמן.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">בקשת שיחת התאמה</a>
+            <a class="btn btn-ghost" href="#docs">מסמכי הקרן ותהליך בדיקה</a>
+          </div>
+
+          <div class="proof-strip">
+            <article class="proof-item">
+              <div class="label">יעד תפעולי</div>
+              <div class="value">תהליך חודשי קבוע ודיווח מסודר</div>
+            </article>
+            <article class="proof-item">
+              <div class="label">פוקוס השקעה</div>
+              <div class="value">מניות גלובליות + הגנות מאקרו</div>
+            </article>
+            <article class="proof-item">
+              <div class="label">קהל יעד</div>
+              <div class="value">משקיעים כשירים בלבד</div>
+            </article>
+            <article class="proof-item">
+              <div class="label">עקרון על</div>
+              <div class="value">ניהול סיכונים לפני חיפוש תשואה</div>
+            </article>
+          </div>
         </div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-eyebrow">קרן גידור למשקיעים כשירים</div>
-                <h1>ניהול הון<br>בגישה משמעתית</h1>
-                <p class="hero-subtitle">
-                    Tradersmind Capital מתמקדת בשימור הון ובניהול סיכונים מחושב. אנו מאמינים שהדרך להצלחה ארוכת טווח עוברת דרך משמעת, סבלנות וקבלת החלטות מושכלת.
-                </p>
-                <div class="hero-cta">
-                    <a href="#philosophy" class="btn btn-primary">הגישה שלנו</a>
-                    <a href="#investors" class="btn btn-secondary">למשקיעים כשירים</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">גישה</div>
-                        <div class="stat-value">שימור הון</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">עקרון מנחה</div>
-                        <div class="stat-value">ניהול סיכונים</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">קהל יעד</div>
-                        <div class="stat-value">משקיעים כשירים</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <aside class="hero-panel" data-reveal>
+          <h3>מסגרת השקעה מוסדית</h3>
+          <p>הקרן בנויה לעבוד במחזור מלא של שוק: הרחבה, תיקון ומשבר.</p>
+          <ul class="hero-list">
+            <li><span>חשיפה דינמית לשוק לפי תנודתיות ומומנטום</span><strong>Daily Review</strong></li>
+            <li><span>הקטנת פוזיציות אוטומטית כאשר סיכון מערכתי עולה</span><strong>Risk Budget</strong></li>
+            <li><span>מגבלת ריכוזיות לפי סקטור, נכס ונושא מאקרו</span><strong>Portfolio Limits</strong></li>
+            <li><span>בקרת ביצוע מול תרחישים ולא רק מול תשואה מוחלטת</span><strong>Scenario Test</strong></li>
+          </ul>
+        </aside>
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section class="page-section" id="about">
-        <div class="container">
-            <div class="content-grid">
-                <div class="section-header fade-in">
-                    <div class="section-number">01</div>
-                    <h2>אודות Tradersmind Capital</h2>
-                </div>
-                <div class="content-text fade-in">
-                    <p>
-                        Tradersmind Capital היא קרן גידור הפועלת מתוך הבנה עמוקה שהצלחה בשוקי ההון נמדדת לא רק ברווחים, אלא בעיקר ביכולת לשמר הון ולנהל סיכונים בצורה מושכלת לאורך זמן.
-                    </p>
-                    <p>
-                        הקרן הוקמה מתוך אמונה שניהול השקעות מקצועי דורש שילוב של משמעת קפדנית, הבנה מעמיקה של שוקי ההון, ויכולת לקבל החלטות מושכלות גם בתנאי שוק מאתגרים.
-                    </p>
-                    <p>
-                        אנו פועלים בשקיפות מלאה מול המשקיעים שלנו, תוך שמירה על עקרונות מקצועיים ברורים. הגישה שלנו אינה מבוססת על הבטחות או חיזוי עתיד, אלא על תהליך השקעה מסודר וממושמע.
-                    </p>
-                    <div class="info-box">
-                        <h4>העקרונות המנחים אותנו</h4>
-                        <p>שקיפות, משמעת, ניהול סיכונים קפדני, והתמקדות בטווח הארוך. אלו אינם סיסמאות – אלו עקרונות הפעולה שלנו בכל החלטה שאנו מקבלים.</p>
-                    </div>
-                </div>
+    <section class="section" id="about">
+      <div class="container">
+        <span class="chip" data-reveal>מי אנחנו</span>
+        <h2 class="section-title" data-reveal>בית השקעות בוטיק עם סטנדרט קרן גידור מקצועית</h2>
+        <p class="section-intro" data-reveal>
+          Tradersmind Capital הוקמה מתוך תפיסה שמרבית המשקיעים נכשלים לא בגלל מחסור ברעיונות,
+          אלא בגלל היעדר תהליך. לכן בנינו תשתית שעוסקת קודם כל בשליטה בסיכון, משמעת ובקרה אנליטית,
+          ורק לאחר מכן בבחירת עסקאות.
+        </p>
+
+        <div class="grid-2">
+          <article class="card" data-reveal>
+            <h3>הבדל מהותי מול השקעה מסורתית</h3>
+            <p>
+              בניגוד לניהול פסיבי או השקעה המתבססת על מדד יחיד, הקרן משלבת בין רעיונות צמיחה,
+              פוזיציות הגנה וניהול חשיפה דינמי. כאשר תנאי השוק אינם תומכים, אנו מצמצמים סיכון
+              ושומרים על גמישות מלאה במקום להישאר חשופים בכוח.
+            </p>
+            <div class="values-grid">
+              <div class="value">
+                <h4>שקיפות</h4>
+                <p>דיווח תקופתי מובנה: חשיפות, הקצאה, סיכונים מהותיים ופרשנות שוק.</p>
+              </div>
+              <div class="value">
+                <h4>משמעת</h4>
+                <p>כל עסקה עוברת מסנן איכות, טריגר כניסה ונקודת יציאה מוגדרת מראש.</p>
+              </div>
+              <div class="value">
+                <h4>עקביות</h4>
+                <p>ניהול מבוסס חוקים שמטרתו להפחית הטיות רגשיות בהחלטות השקעה.</p>
+              </div>
             </div>
+          </article>
+
+          <figure class="image-card" data-reveal>
+            <img
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+              alt="קו רקיע עירוני המייצג סביבה פיננסית גלובלית"
+              loading="lazy"
+            />
+            <figcaption class="image-caption">פעילות השקעה המתבססת על שווקים גלובליים, ניתוח מאקרו ורגישות לנזילות.</figcaption>
+          </figure>
         </div>
+      </div>
     </section>
 
-    <!-- What is a Hedge Fund Section -->
-    <section class="page-section" id="hedge-fund">
-        <div class="container">
-            <div class="content-grid">
-                <div class="section-header fade-in">
-                    <div class="section-number">02</div>
-                    <h2>מהי קרן גידור?</h2>
-                </div>
-                <div class="content-text fade-in">
-                    <p>
-                        קרן גידור היא כלי השקעה המיועד למשקיעים מתוחכמים, המאפשר גמישות רבה יותר באסטרטגיות ההשקעה בהשוואה לקרנות נאמנות מסורתיות.
-                    </p>
-                    <p>
-                        בניגוד לקרנות נאמנות הכפופות לרגולציה מחמירה המגבילה את אפשרויות ההשקעה, קרנות גידור יכולות לנקוט במגוון אסטרטגיות – כולל מכירה בחסר, שימוש במינוף, ופעילות בשווקים שונים ובמכשירים פיננסיים מגוונים.
-                    </p>
-                    <p>
-                        המונח "גידור" מקורו ביכולת של הקרן לנקוט בפוזיציות שמטרתן להפחית סיכונים, אך חשוב להבין: קרן גידור אינה מבטיחה הגנה מלאה או רווחים. כל השקעה כרוכה בסיכון, וקרנות גידור אינן יוצאות דופן.
-                    </p>
-                </div>
-            </div>
-            <div class="feature-grid fade-in">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <h4>גמישות אסטרטגית</h4>
-                    <p>יכולת לפעול במגוון שווקים ומכשירים פיננסיים, בהתאם לתנאי השוק והזדמנויות.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <h4>אופק השקעה</h4>
-                    <p>קרנות גידור מיועדות למשקיעים עם ראייה ארוכת טווח ויכולת להתמודד עם תנודתיות.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                        </svg>
-                    </div>
-                    <h4>ניהול אקטיבי</h4>
-                    <p>ניהול מקצועי המותאם לתנאי שוק משתנים, להבדיל מהשקעה פסיבית במדדים.</p>
-                </div>
-            </div>
-            <div class="info-box fade-in">
-                <h4>למי מתאימה קרן גידור?</h4>
-                <p>קרנות גידור מיועדות אך ורק למשקיעים כשירים על פי הגדרת החוק – משקיעים בעלי הון משמעותי, ניסיון בשוקי ההון, והבנה של הסיכונים הכרוכים בהשקעה. קרן גידור אינה מתאימה לכל משקיע, ואינה פתוחה לציבור הרחב.</p>
-            </div>
+    <section class="section" id="strategy">
+      <div class="container">
+        <span class="chip" data-reveal>אסטרטגיה</span>
+        <h2 class="section-title" data-reveal>אסטרטגיית Multi-Layer עם שלושה מנועי החלטה</h2>
+        <p class="section-intro" data-reveal>
+          המודל שלנו בנוי משלוש שכבות בלתי תלויות חלקית, במטרה לשפר עמידות בתקופות שוק שונות.
+          כל שכבה מקבלת תקציב סיכון נפרד, ונבחנת גם באופן עצמאי וגם בהשפעתה על הפורטפוליו כולו.
+        </p>
+
+        <div class="strategy-grid">
+          <article class="strategy" data-reveal>
+            <h4>1. מנוע מניות צמיחה איכותית</h4>
+            <p>איתור חברות עם מומנטום רווחיות, יתרון תחרותי ותזמון טכני המאפשר יחס סיכון/תשואה עדיף.</p>
+          </article>
+          <article class="strategy" data-reveal>
+            <h4>2. מנוע Tactical Hedge</h4>
+            <p>שימוש בהגנות שוק ובכלים נגזרים להפחתת drawdown בתקופות של לחץ מערכתי.</p>
+          </article>
+          <article class="strategy" data-reveal>
+            <h4>3. ניהול חשיפה מאקרו</h4>
+            <p>התאמת רמות חשיפה לפי ריבית, אינפלציה, תנודתיות ומדדי רוחב שוק כדי למנוע ריכוז סיכון.</p>
+          </article>
         </div>
+
+        <div class="grid-2" style="margin-top: 1.2rem;">
+          <figure class="image-card" data-reveal>
+            <img
+              src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+              alt="לוח נתונים פיננסיים"
+              loading="lazy"
+            />
+            <figcaption class="image-caption">מערכת החלטה משולבת נתונים: מחיר, נפח, מאקרו וסנטימנט.</figcaption>
+          </figure>
+          <article class="card" data-reveal>
+            <h3>מדיניות הקצאת הון</h3>
+            <p>
+              לכל רעיון השקעה מוגדר מראש גודל פוזיציה התחלתי, טווח הגדלה,
+              ורמת הפחתת סיכון במקרה של סטייה מהתרחיש. המדיניות מונעת מצב שבו רעיון בודד
+              הופך לסיכון משמעותי לתיק כולו.
+            </p>
+            <p style="margin-top: 0.8rem;">
+              אנו לא "מחפשים תמיד להיות בשוק". כאשר אינדיקטורים פנימיים מאותתים על סביבה חלשה,
+              אנו מעלים רכיב מזומן או הגנות במקום לכפות חשיפה מיותרת.
+            </p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Investment Philosophy Section -->
-    <section class="page-section" id="philosophy">
-        <div class="container">
-            <div class="content-grid">
-                <div class="section-header fade-in">
-                    <div class="section-number">03</div>
-                    <h2>פילוסופיית ההשקעה</h2>
-                </div>
-                <div class="content-text fade-in">
-                    <p>
-                        הגישה שלנו מבוססת על עיקרון פשוט אך לעתים נשכח: שימור הון קודם לייצור רווחים. אנו מאמינים שהדרך להצלחה ארוכת טווח עוברת דרך הימנעות מהפסדים משמעותיים.
-                    </p>
-                    <p>
-                        אנו לא מחפשים להכות את השוק בכל מחיר. במקום זאת, אנו מתמקדים בזיהוי הזדמנויות בהן יחס הסיכון-תשואה נראה לנו אטרקטיבי, תוך הבנה שגם ההערכות הטובות ביותר עלולות להתברר כשגויות.
-                    </p>
-                </div>
-            </div>
-            <ul class="principles-list fade-in">
-                <li>
-                    <div class="principle-content">
-                        <h4>סיכון קודם לתשואה</h4>
-                        <p>בכל החלטת השקעה, השאלה הראשונה שאנו שואלים היא "מה יכול להשתבש?" ולא "כמה נרוויח?". גישה זו מכוונת אותנו להחלטות מושכלות יותר.</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="principle-content">
-                        <h4>משמעת מעל הכל</h4>
-                        <p>תהליך קבלת החלטות ברור ומוגדר מראש מאפשר לנו להימנע מהחלטות רגשיות. אנו פועלים על פי כללים קבועים, לא על פי תחושות בטן.</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="principle-content">
-                        <h4>סבלנות כערך</h4>
-                        <p>אנו לא מרגישים צורך להיות פעילים כל הזמן. לעתים, ההחלטה הנכונה ביותר היא לא לעשות דבר ולהמתין להזדמנות המתאימה.</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="principle-content">
-                        <h4>הכרה במגבלות</h4>
-                        <p>אנו יודעים שאיננו יכולים לחזות את העתיד. גישה זו מחייבת אותנו לפעול בצורה זהירה ולהיערך לתרחישים שונים.</p>
-                    </div>
-                </li>
+    <section class="section" id="process">
+      <div class="container">
+        <span class="chip" data-reveal>תהליך עבודה</span>
+        <h2 class="section-title" data-reveal>מתודולוגיית השקעה מקצה לקצה</h2>
+        <p class="section-intro" data-reveal>
+          כל עסקה בקרן עוברת מסלול קבוע של בדיקה, אישור, ביצוע ומעקב.
+          תהליך זה בנוי כך שניתן יהיה להסביר בדיעבד למה נכנסנו, למה יצאנו ומה למדנו.
+        </p>
+
+        <div class="timeline">
+          <article class="step" data-reveal>
+            <h4>שלב 1: סינון כמותי ואיכותי</h4>
+            <p>סינון מניות ונכסים לפי פרמטרים פיננסיים, איכות דוחות, חוזק יחסי, נזילות והתאמה לסביבת המאקרו הנוכחית.</p>
+          </article>
+          <article class="step" data-reveal>
+            <h4>שלב 2: ניסוח תזה עם טריגרים</h4>
+            <p>כתיבת תזה ברורה הכוללת תנאי כניסה, תנאי ביטול עסקה, יעדי סיכון ונקודת אי-תוקף לתרחיש.</p>
+          </article>
+          <article class="step" data-reveal>
+            <h4>שלב 3: הקצאה הדרגתית ובקרת ביצוע</h4>
+            <p>הגדלת פוזיציה רק כאשר המחיר והנתונים מאשרים את הכיוון; הקטנה או יציאה מהירה כאשר ההנחה נשברת.</p>
+          </article>
+          <article class="step" data-reveal>
+            <h4>שלב 4: Post-Trade Review</h4>
+            <p>כל עסקה מתועדת במערכת פנימית לצורך שיפור מתמשך: איכות החלטה, איכות ביצוע, והשלכות על הסיכון הכולל.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="risk">
+      <div class="container">
+        <span class="chip" data-reveal>ניהול סיכונים</span>
+        <h2 class="section-title" data-reveal>מערך בקרת סיכון רב-שכבתי</h2>
+        <p class="section-intro" data-reveal>
+          ניהול סיכונים אינו משפט שיווקי אלא מערכת הפעלה. הקרן פועלת עם מגבלות קשיחות ברמת עסקה,
+          סקטור ותיק כולל, לצד בדיקות תרחיש רציפות כדי להיערך גם לאירועים נדירים.
+        </p>
+
+        <div class="risk-grid">
+          <div data-reveal>
+            <table aria-label="טבלת בקרת סיכונים">
+              <thead>
+                <tr>
+                  <th>שכבת בקרה</th>
+                  <th>איך זה מיושם בפועל</th>
+                  <th>מטרה</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>עסקה בודדת</td>
+                  <td>סיכון מקסימלי מוגדר לכל כניסה ו-Stop מובנה</td>
+                  <td>מניעת פגיעה חריגה מהחלטה אחת</td>
+                </tr>
+                <tr>
+                  <td>אשכול סקטוריאלי</td>
+                  <td>מגבלת חשיפה לכל סקטור/Theme</td>
+                  <td>צמצום קורלציה פנימית בתיק</td>
+                </tr>
+                <tr>
+                  <td>תיק כולל</td>
+                  <td>VaR פנימי, ניטור תנודתיות והגבלת מינוף</td>
+                  <td>שמירה על יציבות ברמת הקרן</td>
+                </tr>
+                <tr>
+                  <td>Stress Scenarios</td>
+                  <td>בדיקות משבר, קפיצת ריבית וירידת נזילות</td>
+                  <td>מוכנות מוקדמת למצבי קיצון</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="highlight" data-reveal>
+            <h4>הבהרת סיכון מחייבת</h4>
+            <p>
+              השקעה בקרן גידור כרוכה בסיכון מהותי, כולל אפשרות לאובדן חלק או מלוא הקרן.
+              אין כל הבטחה לתשואה, ואין להסתמך על ביצועי עבר כאינדיקציה לביצועים עתידיים.
+            </p>
+            <ul>
+              <li>הקרן אינה מתאימה לכל משקיע.</li>
+              <li>התשואה עשויה להיות תנודתית בתקופות שונות.</li>
+              <li>המידע באתר אינו ייעוץ השקעות אישי.</li>
             </ul>
+          </aside>
         </div>
+      </div>
     </section>
 
-    <!-- Risk Management Section -->
-    <section class="page-section" id="risk">
-        <div class="container">
-            <div class="content-grid">
-                <div class="section-header fade-in">
-                    <div class="section-number">04</div>
-                    <h2>ניהול סיכונים</h2>
-                </div>
-                <div class="content-text fade-in">
-                    <p>
-                        ניהול סיכונים הוא לב הפעילות שלנו. אנו מאמינים שמשקיע מצליח נמדד לא רק ביכולתו לזהות הזדמנויות, אלא בעיקר ביכולתו להגן על ההון שלו בזמנים קשים.
-                    </p>
-                    <p>
-                        המערכת שלנו כוללת מספר שכבות של בקרת סיכונים – מרמת הפוזיציה הבודדת ועד לרמת התיק כולו. אנו מגדירים מראש את הסיכון המקסימלי שאנו מוכנים לקחת בכל מצב.
-                    </p>
-                    <p>
-                        חשוב להדגיש: ניהול סיכונים אינו מבטיח הימנעות מהפסדים. גם המערכת המתוחכמת ביותר אינה יכולה להגן מפני כל תרחיש. מטרתנו היא להפחית סיכונים, לא לבטל אותם – משימה בלתי אפשרית בעולם ההשקעות.
-                    </p>
-                </div>
-            </div>
-            <div class="feature-grid fade-in">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="3" y="3" width="18" height="18" rx="2"/>
-                            <path d="M3 9h18M9 21V9"/>
-                        </svg>
-                    </div>
-                    <h4>גבולות מוגדרים</h4>
-                    <p>קביעת מגבלות סיכון ברורות לכל פוזיציה ולתיק כולו, והקפדה על קווים אדומים שלא חוצים.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                        </svg>
-                    </div>
-                    <h4>פיזור מחושב</h4>
-                    <p>התמקדות בפיזור חכם שמפחית קורלציות, לא רק פיזור לשם פיזור.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    <h4>היערכות לקיצון</h4>
-                    <p>תכנון מראש לתרחישי קיצון ואירועי "זנב שחור" – אירועים נדירים אך בעלי השפעה משמעותית.</p>
-                </div>
-            </div>
-            <div class="disclaimer-box fade-in">
-                <h4>הבהרה חשובה</h4>
-                <p>אין באמור לעיל משום הבטחה או התחייבות לתוצאות כלשהן. כל השקעה כרוכה בסיכון, כולל סיכון לאובדן חלק מהקרן או כולה. ביצועי עבר אינם מהווים אינדיקציה לביצועים עתידיים.</p>
-            </div>
+    <section class="section" id="governance">
+      <div class="container">
+        <span class="chip" data-reveal>ממשל ותפעול</span>
+        <h2 class="section-title" data-reveal>תשתית תפעולית שמאפשרת בדיקת נאותות רצינית</h2>
+        <p class="section-intro" data-reveal>
+          משקיע מקצועי לא בוחן רק רעיון השקעה, אלא גם איכות התפעול.
+          לכן בנינו מודל הכולל הפרדת תפקידים, תיעוד מובנה, תהליכי בקרה ופיקוח רגולטורי בהתאם למסגרת הפעילות.
+        </p>
+
+        <div class="grid-2">
+          <article class="card" data-reveal>
+            <h3>נקודות ליבה בתשתית הקרן</h3>
+            <p>
+              בקרת תפעול יומית, הפרדת סמכויות בין קבלת החלטות השקעה לביצוע,
+              תיעוד מלא של מדיניות מסחר, ועדכוני מדיניות סיכונים כאשר תנאי השוק משתנים.
+            </p>
+            <p style="margin-top: 0.7rem;">
+              אנו מקפידים על תהליך Onboarding למשקיע כשיר הכולל אימות נתונים,
+              מסמכי הצטרפות מסודרים, ושקיפות לגבי מגבלות, עמלות ונזילות.
+            </p>
+          </article>
+
+          <figure class="image-card" data-reveal>
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+              alt="ניתוח פיננסי על מסכים"
+              loading="lazy"
+            />
+            <figcaption class="image-caption">Governance אמיתי: תהליך, בקרה, תיעוד ותפעול עקבי.</figcaption>
+          </figure>
         </div>
+      </div>
     </section>
 
-    <!-- Qualified Investors Section -->
-    <section class="page-section" id="investors">
-        <div class="container">
-            <div class="content-grid">
-                <div class="section-header fade-in">
-                    <div class="section-number">05</div>
-                    <h2>למשקיעים כשירים בלבד</h2>
-                </div>
-                <div class="content-text fade-in">
-                    <p>
-                        על פי הרגולציה בישראל, קרנות גידור רשאיות לקבל השקעות אך ורק ממשקיעים כשירים. הגדרה זו נועדה להבטיח שמשקיעים בקרנות גידור מבינים את הסיכונים הכרוכים בהשקעה ומסוגלים לשאת בהם.
-                    </p>
-                    <p>
-                        Tradersmind Capital פועלת בהתאם לכל דרישות הרגולציה ואינה מקבלת השקעות ממי שאינו עומד בהגדרת משקיע כשיר.
-                    </p>
-                </div>
-            </div>
-            <div class="info-box fade-in" style="margin-top: var(--spacing-lg);">
-                <h4>מיהו משקיע כשיר?</h4>
-                <p>על פי חוק ניירות ערך בישראל, משקיע כשיר הוא מי שעומד באחד או יותר מהקריטריונים הבאים:</p>
-                <ul style="list-style: none; margin-top: var(--spacing-md);">
-                    <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--color-border-subtle); display: flex; gap: var(--spacing-sm);">
-                        <span style="color: var(--color-accent);">—</span>
-                        <span>מי שהשווי הכולל של מזומנים, פיקדונות, נכסים פיננסיים וניירות ערך שבבעלותו עולה על 8,364,177 ש"ח</span>
-                    </li>
-                    <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--color-border-subtle); display: flex; gap: var(--spacing-sm);">
-                        <span style="color: var(--color-accent);">—</span>
-                        <span>מי שהכנסתו בכל אחת משתי השנים האחרונות עולה על 1,254,627 ש"ח, או שהכנסת התא המשפחתי שלו עולה על 1,881,940 ש"ח</span>
-                    </li>
-                    <li style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--color-border-subtle); display: flex; gap: var(--spacing-sm);">
-                        <span style="color: var(--color-accent);">—</span>
-                        <span>מי שהשווי הכולל של הנכסים שבבעלותו עולה על 8,364,177 ש"ח והכנסתו בכל אחת משתי השנים האחרונות עולה על 627,313 ש"ח, או שהכנסת התא המשפחתי שלו עולה על 940,970 ש"ח</span>
-                    </li>
-                </ul>
-                <p style="margin-top: var(--spacing-md); font-size: 0.9rem; color: var(--color-text-muted);">
-                    * הסכומים מתעדכנים מעת לעת. יש לבדוק את הסכומים העדכניים מול רשות ניירות ערך.
-                </p>
-            </div>
-            <div class="disclaimer-box fade-in">
-                <h4>הבהרה חשובה</h4>
-                <p>אתר זה אינו מהווה הצעה להשקעה ואינו מיועד לציבור הרחב. המידע המוצג באתר נועד למטרות מידע כלליות בלבד ואינו מהווה ייעוץ השקעות, המלצה לרכישה או מכירה של ניירות ערך, או שידול להשקעה.</p>
-                <p>פנייה לקרן אינה מהווה קבלה כמשקיע. הקרן שומרת לעצמה את הזכות לבחון כל פנייה ולהחליט על קבלת משקיעים בהתאם לשיקול דעתה.</p>
-            </div>
+    <section class="section" id="docs">
+      <div class="container">
+        <span class="chip" data-reveal>מסמכים למשקיע</span>
+        <h2 class="section-title" data-reveal>חבילת Due Diligence מלאה לפני כניסה להשקעה</h2>
+        <p class="section-intro" data-reveal>
+          לפני כל השקעה, משקיע כשיר מקבל חבילת מידע מסודרת הכוללת תיאור אסטרטגיה,
+          מדיניות סיכונים, מבנה עמלות, תנאי נזילות והבהרות משפטיות.
+        </p>
+
+        <div class="docs-grid">
+          <article class="doc" data-reveal>
+            <span class="tag">Legal</span>
+            <h4>מצגת קרן ומדיניות השקעה</h4>
+            <p>סקירת אסטרטגיה, פילוסופיית סיכון, סקטורים מרכזיים ותהליך עבודה.</p>
+          </article>
+          <article class="doc" data-reveal>
+            <span class="tag">Operations</span>
+            <h4>מסמך נהלי סיכון ובקרה</h4>
+            <p>מגבלות חשיפה, נהלי stop, תרחישי קיצון ומנגנוני הורדת סיכון.</p>
+          </article>
+          <article class="doc" data-reveal>
+            <span class="tag">Investor Onboarding</span>
+            <h4>טפסי הצטרפות למשקיע כשיר</h4>
+            <p>אימות כשירות לפי חוק, מסמכי הצהרה וזיהוי כנדרש.</p>
+          </article>
+          <article class="doc" data-reveal>
+            <span class="tag">Reporting</span>
+            <h4>פורמט דיווח תקופתי</h4>
+            <p>שקיפות על חשיפות, ביצועים, סיכונים עיקריים ושינויים במדיניות.</p>
+          </article>
+          <article class="doc" data-reveal>
+            <span class="tag">Fees &amp; Terms</span>
+            <h4>מבנה עמלות ותנאי נזילות</h4>
+            <p>דמי ניהול, תנאי פדיון, תקופות הודעה מוקדמת והיבטים חוזיים.</p>
+          </article>
+          <article class="doc" data-reveal>
+            <span class="tag">Compliance</span>
+            <h4>הצהרות סיכון והגבלות הפצה</h4>
+            <p>הבהרות משפטיות מלאות למשקיעים כשירים בלבד, ללא הצעה לציבור.</p>
+          </article>
         </div>
+      </div>
     </section>
 
-    <!-- Legal Disclaimer Section -->
-    <section class="page-section" id="legal">
-        <div class="container">
-            <div class="content-grid">
-                <div class="section-header fade-in">
-                    <div class="section-number">06</div>
-                    <h2>מידע משפטי</h2>
-                </div>
-                <div class="content-text fade-in">
-                    <p>
-                        המידע המוצג באתר זה נועד למטרות מידע כלליות בלבד. אין באמור באתר זה משום הצעה, שידול או הזמנה לרכישה או מכירה של ניירות ערך או מכשירים פיננסיים אחרים.
-                    </p>
-                </div>
-            </div>
-            <div class="disclaimer-box fade-in" style="margin-top: var(--spacing-md);">
-                <h4>הגבלת אחריות</h4>
-                <p>Tradersmind Capital ו/או מי מטעמה אינם אחראים לכל נזק, הפסד או הוצאה מכל סוג שהוא שייגרמו למי שיסתמך על המידע המוצג באתר זה.</p>
-                <p>אין להסתמך על המידע באתר זה לצורך קבלת החלטות השקעה. כל החלטת השקעה צריכה להתבסס על בדיקה עצמאית ועל ייעוץ מקצועי מתאים.</p>
-            </div>
-            <div class="disclaimer-box fade-in" style="margin-top: var(--spacing-md);">
-                <h4>אין הבטחת תשואה</h4>
-                <p>אין באמור באתר זה משום הבטחה או התחייבות לתשואה כלשהי. השקעה בקרן כרוכה בסיכון, כולל סיכון לאובדן חלק מהקרן או כולה. ביצועי עבר, ככל שמוצגים, אינם מהווים אינדיקציה לביצועים עתידיים.</p>
-            </div>
-            <div class="disclaimer-box fade-in" style="margin-top: var(--spacing-md);">
-                <h4>קהל יעד</h4>
-                <p>אתר זה והמידע הכלול בו מיועדים אך ורק למשקיעים כשירים כהגדרתם בחוק ניירות ערך בישראל. אין לראות באתר זה הצעה לציבור הרחב.</p>
-            </div>
-            <div class="disclaimer-box fade-in" style="margin-top: var(--spacing-md);">
-                <h4>זכויות יוצרים</h4>
-                <p>כל הזכויות באתר זה ובתכניו שמורות ל-Tradersmind Capital. אין להעתיק, לשכפל, להפיץ או לעשות שימוש אחר בתכני האתר ללא אישור בכתב מראש.</p>
-            </div>
+    <section class="section" id="faq">
+      <div class="container">
+        <span class="chip" data-reveal>FAQ</span>
+        <h2 class="section-title" data-reveal>שאלות נפוצות של משקיעים כשירים</h2>
+        <div class="faq">
+          <details data-reveal>
+            <summary>למי הקרן מיועדת?</summary>
+            <p>הקרן מיועדת למשקיעים כשירים בלבד, בהתאם להגדרה הרלוונטית בדין. האתר אינו פונה לציבור הרחב.</p>
+          </details>
+          <details data-reveal>
+            <summary>האם הקרן מבטיחה תשואה?</summary>
+            <p>לא. אין כל הבטחה לתשואה, וכל השקעה כרוכה בסיכון, כולל סיכון לאובדן הון.</p>
+          </details>
+          <details data-reveal>
+            <summary>איך נראה תהליך ההצטרפות?</summary>
+            <p>לאחר שיחת התאמה ראשונית, מתבצע תהליך אימות כשירות, מסירת מסמכים, סקירת תנאים והשלמת הצטרפות.</p>
+          </details>
+          <details data-reveal>
+            <summary>איזה מידע משקיע מקבל באופן שוטף?</summary>
+            <p>המשקיע מקבל דיווחים תקופתיים הכוללים תמונת חשיפות, ניתוח ביצועים, ועדכוני סיכון מרכזיים.</p>
+          </details>
+          <details data-reveal>
+            <summary>מהי מדיניות נזילות ופדיון?</summary>
+            <p>מדיניות הנזילות מפורטת במסמכי הקרן ובכפוף לתנאי ההשקעה המחייבים בכל נקודת זמן.</p>
+          </details>
         </div>
+      </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="page-section contact-section" id="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="fade-in">
-                    <div class="section-header">
-                        <div class="section-number">07</div>
-                        <h2>יצירת קשר</h2>
-                    </div>
-                    <div class="contact-info">
-                        <p>
-                            פנייה לקרן מיועדת למשקיעים כשירים המעוניינים לקבל מידע נוסף. אנו מבקשים לציין כי פנייה אינה מהווה קבלה כמשקיע, והקרן שומרת לעצמה את הזכות לבחון כל פנייה בנפרד.
-                        </p>
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <div class="contact-label">דוא"ל</div>
-                                <div class="contact-value">
-                                    <a href="mailto:info@tradersmind-capital.com">info@tradersmind-capital.com</a>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-label">מיקום</div>
-                                <div class="contact-value">תל אביב, ישראל</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form fade-in">
-                    <form action="#" method="post">
-                        <div class="form-group">
-                            <label class="form-label" for="name">שם מלא</label>
-                            <input type="text" id="name" name="name" class="form-input" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="email">דוא"ל</label>
-                            <input type="email" id="email" name="email" class="form-input" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="phone">טלפון</label>
-                            <input type="tel" id="phone" name="phone" class="form-input">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="message">הודעה</label>
-                            <textarea id="message" name="message" class="form-input" placeholder="נא לפרט את מטרת הפנייה..."></textarea>
-                        </div>
-                        <div class="form-checkbox">
-                            <input type="checkbox" id="qualified" name="qualified" required>
-                            <label for="qualified">אני מאשר/ת כי אני עומד/ת בהגדרת משקיע כשיר על פי חוק ניירות ערך בישראל</label>
-                        </div>
-                        <div class="form-checkbox">
-                            <input type="checkbox" id="disclaimer" name="disclaimer" required>
-                            <label for="disclaimer">קראתי והבנתי את המידע המשפטי והבהרות הסיכון המופיעים באתר</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">שליחת פנייה</button>
-                    </form>
-                </div>
-            </div>
+    <section class="section" id="legal">
+      <div class="container">
+        <span class="chip" data-reveal>מידע משפטי ורגולטורי</span>
+        <h2 class="section-title" data-reveal>הבהרות מחייבות לפי מסגרת הדין בישראל</h2>
+        <p class="section-intro" data-reveal>
+          התכנים באתר מיועדים למסירת מידע כללי בלבד ואינם מהווים תחליף לעיון במסמכי הקרן המחייבים.
+          במקרה של סתירה, נוסח מסמכי ההשקעה המחייבים גובר.
+        </p>
+
+        <div class="legal-grid">
+          <article class="card" data-reveal>
+            <h3>הגבלת הפצה וקהל יעד</h3>
+            <p>
+              התוכן באתר מיועד למשקיעים כשירים בלבד כהגדרתם בדין, ואינו מהווה הצעה לציבור.
+              אין להפיץ, לשכפל או לעשות שימוש שיווקי במידע ללא אישור מראש ובכתב.
+            </p>
+            <ul class="legal-list">
+              <li>המידע אינו מהווה ייעוץ השקעות, ייעוץ מס או ייעוץ משפטי.</li>
+              <li>אין לראות בתוכן התחייבות לביצועי השקעה או לשימור הון.</li>
+              <li>קבלת מידע מהקרן כפופה להליך אימות כשירות ובדיקת נאותות.</li>
+            </ul>
+          </article>
+
+          <article class="card" data-reveal>
+            <h3>סיכונים, ביצועים ואחריות</h3>
+            <p>
+              השקעה בקרן גידור כרוכה בסיכונים מהותיים, לרבות סיכון שוק, סיכון נזילות,
+              סיכוני מאקרו וסיכון לאובדן חלקי או מלא של הקרן.
+            </p>
+            <ul class="legal-list">
+              <li>ביצועי עבר אינם מעידים על ביצועים עתידיים.</li>
+              <li>נתונים, תחזיות ותסריטים עשויים להשתנות ללא הודעה מוקדמת.</li>
+              <li>כל החלטת השקעה תתקבל לאחר עיון במסמכי ההשקעה המחייבים בלבד.</li>
+            </ul>
+          </article>
         </div>
+
+        <aside class="highlight" data-reveal style="margin-top: 1rem;">
+          <h4>הבהרה משלימה</h4>
+          <p>
+            אין באמור באתר משום שידול או הזמנה לרכישת יחידות השתתפות. הפניה לקרן אינה יוצרת התחייבות לקבלת משקיע.
+            הדין החל וסמכות השיפוט יהיו בהתאם למפורט במסמכי הקרן ובהתאם לדין הישראלי.
+          </p>
+        </aside>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-copy">
-                    © 2025 Tradersmind Capital. כל הזכויות שמורות.
-                </div>
-                <ul class="footer-links">
-                    <li><a href="#legal">מידע משפטי</a></li>
-                    <li><a href="#investors">משקיעים כשירים</a></li>
-                    <li><a href="#contact">יצירת קשר</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    <section class="section" id="contact">
+      <div class="container">
+        <span class="chip" data-reveal>יצירת קשר</span>
+        <h2 class="section-title" data-reveal>תיאום פגישה למשקיעים כשירים</h2>
+        <p class="section-intro" data-reveal>
+          אם אתה משקיע כשיר ומעוניין לבחון התאמה לקרן, נשמח לתאם שיחה מקצועית.
+          הפנייה אינה מהווה התחייבות לקבלה להשקעה.
+        </p>
 
-    <script>
-        // Navigation scroll effect
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+        <div class="contact-wrap">
+          <article class="contact-panel" data-reveal>
+            <h3>פרטי קשר</h3>
+            <ul class="contact-list">
+              <li><strong>דוא"ל:</strong> <a href="mailto:info@tradersmind-capital.com">info@tradersmind-capital.com</a></li>
+              <li><strong>מיקום פעילות:</strong> תל אביב, ישראל</li>
+              <li><strong>זמני מענה:</strong> א'-ה' 09:00-18:00</li>
+              <li><strong>שפת עבודה:</strong> עברית / אנגלית</li>
+            </ul>
+
+            <div class="legal-note">
+              המידע באתר אינו מהווה ייעוץ השקעות/שיווק השקעות, הצעה לציבור או התחייבות לתשואה.
+              ההסתמכות על המידע באחריות המשתמש בלבד ובכפוף למסמכי ההשקעה המחייבים.
+            </div>
+          </article>
+
+          <form class="contact-form" data-reveal action="#" method="post">
+            <div class="field">
+              <label for="fullName">שם מלא</label>
+              <input id="fullName" name="fullName" type="text" required />
+            </div>
+            <div class="field">
+              <label for="email">דוא"ל</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+            <div class="field">
+              <label for="phone">טלפון</label>
+              <input id="phone" name="phone" type="tel" />
+            </div>
+            <div class="field">
+              <label for="capital">היקף השקעה מוערך</label>
+              <select id="capital" name="capital">
+                <option value="">בחירה</option>
+                <option>עד 2 מיליון ש"ח</option>
+                <option>2-10 מיליון ש"ח</option>
+                <option>מעל 10 מיליון ש"ח</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">הודעה</label>
+              <textarea id="message" name="message" placeholder="נא לציין רקע השקעה ומטרת הפנייה"></textarea>
+            </div>
+
+            <div class="checks">
+              <label class="check"><input type="checkbox" required /> אני מאשר/ת כי ייתכן שאני עומד/ת בהגדרת משקיע כשיר ואשלים אימות לפי דין.</label>
+              <label class="check"><input type="checkbox" required /> קראתי את הבהרות הסיכון והמידע המשפטי המופיעים באתר.</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">שליחת פנייה</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Tradersmind Capital. כל הזכויות שמורות.</p>
+      <ul class="footer-links">
+        <li><a href="#risk">הבהרות סיכון</a></li>
+        <li><a href="#docs">מסמכי הקרן</a></li>
+        <li><a href="#legal">משפטי ורגולציה</a></li>
+        <li><a href="#faq">שאלות נפוצות</a></li>
+        <li><a href="#contact">יצירת קשר</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    const topbar = document.getElementById("topbar");
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    window.addEventListener("scroll", () => {
+      topbar.classList.toggle("scrolled", window.scrollY > 30);
+    });
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
         });
+      },
+      { threshold: 0.12 }
+    );
 
-        // Fade in on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+    document.querySelectorAll("[data-reveal]").forEach((node) => observer.observe(node));
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        fadeElements.forEach(element => {
-            observer.observe(element);
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
